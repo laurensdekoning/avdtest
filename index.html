@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avondvierdaagse Boskoop 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --groen: #2d5a27;
+    --groen-licht: #4a8c40;
+    --goud: #c8922a;
+    --goud-licht: #e8b84b;
+    --creme: #f7f2e8;
+    --donker: #1a1a1a;
+    --wit: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--creme);
+    color: var(--donker);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(45, 90, 39, 0.97);
+    backdrop-filter: blur(8px);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--goud-licht);
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 0.25rem; list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    padding: 0.35rem 0.7rem;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.12); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(160deg, rgba(45,90,39,0.88) 0%, rgba(26,26,26,0.6) 100%),
+      url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80') center/cover no-repeat;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 120px 8vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--creme));
+  }
+  .hero-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--goud-licht);
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 1.0;
+    color: #fff;
+    max-width: 14ch;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .hero h1 span { color: var(--goud-licht); display: block; }
+  .hero-meta {
+    margin-top: 2rem;
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.6s forwards;
+  }
+  .hero-meta-item {
+    display: flex; flex-direction: column;
+  }
+  .hero-meta-item .label {
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--goud-licht); font-weight: 500;
+  }
+  .hero-meta-item .value {
+    font-size: 1.1rem; color: #fff; font-weight: 400; margin-top: 2px;
+  }
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.8s forwards;
+  }
+  .btn-primary {
+    background: var(--goud);
+    color: #fff;
+    border: none; cursor: pointer;
+    padding: 0.9rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 500;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--goud-licht); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    padding: 0.9rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 500;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-bar {
+    background: var(--groen);
+    padding: 1.5rem 8vw;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .countdown-label {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 500;
+  }
+  .countdown-numbers {
+    display: flex; gap: 1.5rem;
+  }
+  .cd-unit { text-align: center; }
+  .cd-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700;
+    color: var(--goud-licht);
+    display: block; line-height: 1;
+  }
+  .cd-lbl { font-size: 0.65rem; color: rgba(255,255,255,0.6); letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 8vw; }
+
+  .section-eyebrow {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--groen-licht);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.15;
+    color: var(--donker);
+    max-width: 22ch;
+    margin-bottom: 1.5rem;
+  }
+  .section-body {
+    font-size: 1rem; line-height: 1.75;
+    color: #444;
+    max-width: 65ch;
+  }
+
+  /* ── INFO CARDS ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .info-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    border-left: 4px solid var(--groen-licht);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .info-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+  .info-card .icon {
+    font-size: 1.8rem; margin-bottom: 1rem; display: block;
+  }
+  .info-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; margin-bottom: 0.6rem; color: var(--groen);
+  }
+  .info-card p { font-size: 0.92rem; color: #555; line-height: 1.6; }
+  .info-card .highlight {
+    font-weight: 700; font-size: 1.4rem;
+    color: var(--goud); display: block; margin-top: 0.5rem;
+  }
+
+  /* ── INSCHRIJVING ── */
+  .inschrijving-section {
+    background: var(--groen);
+    color: #fff;
+  }
+  .inschrijving-section .section-eyebrow { color: var(--goud-licht); }
+  .inschrijving-section .section-title { color: #fff; }
+  .inschrijving-section .section-body { color: rgba(255,255,255,0.8); }
+  .verkoop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  .verkoop-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .verkoop-card .store-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+  .verkoop-card h4 { font-size: 1rem; font-weight: 500; color: #fff; }
+  .verkoop-card p { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem; }
+
+  .prijs-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--goud);
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+    border-radius: 100px;
+    font-size: 1.1rem; font-weight: 500;
+    margin-top: 2rem;
+  }
+
+  /* ── ROUTES ── */
+  .routes-section { background: #fff; }
+  .routes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .route-card {
+    background: var(--creme);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .route-header {
+    background: var(--groen-licht);
+    padding: 1.2rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .route-header h3 { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.1rem; }
+  .route-dist {
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.85rem; font-weight: 500;
+  }
+  .route-body { padding: 1.2rem 1.5rem; }
+  .route-body p { font-size: 0.9rem; color: #555; line-height: 1.6; }
+
+  /* ── PROGRAMMA / TIJDLIJN ── */
+  .tijdlijn {
+    margin-top: 2.5rem;
+    position: relative;
+    padding-left: 2rem;
+  }
+  .tijdlijn::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: var(--groen-licht);
+    opacity: 0.3;
+  }
+  .tijdlijn-item {
+    position: relative;
+    padding: 0 0 2rem 1.5rem;
+  }
+  .tijdlijn-item::before {
+    content: '';
+    position: absolute; left: -1.4rem; top: 6px;
+    width: 10px; height: 10px;
+    background: var(--groen-licht); border-radius: 50%;
+    border: 2px solid var(--creme);
+  }
+  .tijdlijn-item .dag {
+    font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--groen-licht); font-weight: 500;
+  }
+  .tijdlijn-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--donker); margin: 0.25rem 0;
+  }
+  .tijdlijn-item p { font-size: 0.88rem; color: #666; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--donker);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 8vw;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer .footer-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--goud-licht); font-size: 1rem;
+  }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.85rem; }
+  footer a:hover { color: #fff; }
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hero { padding: 100px 6vw 60px; }
+    section { padding: 60px 6vw; }
+    .countdown-bar { padding: 1.2rem 6vw; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Avondvierdaagse Boskoop</a>
+  <ul class="nav-links">
+    <li><a href="#over">Over</a></li>
+    <li><a href="#programma">Programma</a></li>
+    <li><a href="#routes">Routes</a></li>
+    <li><a href="#inschrijving">Inschrijven</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-label">Boskoop · 2026</div>
+  <h1>Avond<span>Vier·daagse</span></h1>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="label">Startdatum</span>
+      <span class="value">Maandag 1 juni</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">t/m</span>
+      <span class="value">Donderdag 4 juni</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">Starttijd</span>
+      <span class="value">18:30 uur — Gouweplein</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">Prijs</span>
+      <span class="value">€ 6,- p.p.</span>
+    </div>
+  </div>
+  <div class="hero-cta">
+    <a href="#inschrijving" class="btn-primary">Kaarten kopen</a>
+    <a href="#routes" class="btn-secondary">Bekijk de routes</a>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<div class="countdown-bar" id="countdown-bar">
+  <div class="countdown-label">Nog te gaan tot de start</div>
+  <div class="countdown-numbers">
+    <div class="cd-unit"><span class="cd-num" id="cd-days">—</span><span class="cd-lbl">dagen</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-hours">—</span><span class="cd-lbl">uren</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-mins">—</span><span class="cd-lbl">minuten</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-secs">—</span><span class="cd-lbl">seconden</span></div>
+  </div>
+</div>
+
+<!-- OVER -->
+<section id="over">
+  <div class="section-eyebrow">Welkom</div>
+  <h2 class="section-title">Door de mooiste hoekjes van Boskoop</h2>
+  <p class="section-body">
+    Ieder jaar organiseert Stichting Avondvierdaagse Boskoop een gezellige wandelvierdaagse door Boskoop en omgeving.
+    We zetten steeds nieuwe, afwisselende routes uit langs de mooiste plekjes van het dorp.<br><br>
+    De laatste avond lopen alle deelnemers dezelfde route en worden ingehaald over de Zijde — begeleid door muziekkorpsen, altijd een bijzondere sfeer.
+    Na afloop komen we samen op het Gouweplein voor een drankje en een hapje, aangeboden door de dorpskernwinkeliers.
+  </p>
+  <div class="info-grid">
+    <div class="info-card">
+      <span class="icon">🚶</span>
+      <h3>Voor iedereen</h3>
+      <p>Meerdere routes voor elk niveau — van een korte familietocht tot een uitdagendere wandeling.</p>
+    </div>
+    <div class="info-card">
+      <span class="icon">📍</span>
+      <h3>Start & finish</h3>
+      <p>Elke avond start en finish op het Gouweplein.</p>
+      <span class="highlight">18:30 uur</span>
+    </div>
+    <div class="info-card">
+      <span class="icon">🎶</span>
+      <h3>Slotavond</h3>
+      <p>Muziekkorpsen, de optocht over de Zijde en gezelligheid op het Gouweplein met alle deelnemers.</p>
+    </div>
+    <div class="info-card">
+      <span class="icon">🛡️</span>
+      <h3>Veiligheid</h3>
+      <p>Goede samenwerking met gemeente en politie. Vrijwilligers langs de route voor jouw veiligheid.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMMA -->
+<section id="programma" style="background:#fff;">
+  <div class="section-eyebrow">Planning</div>
+  <h2 class="section-title">Het programma</h2>
+  <p class="section-body">Vier avonden wandelen, elke avond om 18:30 van start op het Gouweplein.</p>
+  <div class="tijdlijn">
+    <div class="tijdlijn-item">
+      <span class="dag">Maandag 1 juni</span>
+      <h4>Avond 1 — Startavond</h4>
+      <p>Start 18:30 uur · Gouweplein · Kaartverkoop bij de kraam vanaf 18:15 uur</p>
+    </div>
+    <div class="tijdlijn-item">
+      <span class="dag">Dinsdag 2 juni</span>
+      <h4>Avond 2</h4>
+      <p>Start 18:30 uur · Gouweplein</p>
+    </div>
+    <div class="tijdlijn-item">
+      <span class="dag">Woensdag 3 juni</span>
+      <h4>Avond 3</h4>
+      <p>Start 18:30 uur · Gouweplein</p>
+    </div>
+    <div class="tijdlijn-item">
+      <span class="dag">Donderdag 4 juni</span>
+      <h4>Avond 4 — Slotavond 🎉</h4>
+      <p>Gezamenlijke route · Optocht over de Zijde · Muziekkorpsen · Afsluiting op het Gouweplein met hapje & drankje</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTES -->
+<section class="routes-section" id="routes">
+  <div class="section-eyebrow">Routeinfo</div>
+  <h2 class="section-title">Kies jouw route</h2>
+  <p class="section-body">Voor elk looptempo is er een passende route. De exacte routes worden vlak voor het evenement bekendgemaakt.</p>
+  <div class="routes-grid">
+    <div class="route-card">
+      <div class="route-header">
+        <h3>Famileroute</h3>
+        <span class="route-dist">± 5 km</span>
+      </div>
+      <div class="route-body">
+        <p>De kortste en gemakkelijkste route, perfect voor jonge kinderen en minder geoefende wandelaars. Rustig tempo, mooie omgeving.</p>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="route-header" style="background: var(--groen);">
+        <h3>Standaardroute</h3>
+        <span class="route-dist">± 10 km</span>
+      </div>
+      <div class="route-body">
+        <p>De meest gelopen route langs de mooiste plekken van Boskoop en directe omgeving. Geschikt voor iedereen.</p>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="route-header" style="background: #3a3a2a;">
+        <h3>Lange route</h3>
+        <span class="route-dist">± 15 km</span>
+      </div>
+      <div class="route-body">
+        <p>Voor de meer geoefende wandelaar. Uitgebreidere tocht met extra mooie plekjes. Degelijke schoenen aanbevolen.</p>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.85rem; color:#888;">* Exacte afstanden worden bekendgemaakt bij aanvang van het evenement.</p>
+</section>
+
+<!-- INSCHRIJVING -->
+<section class="inschrijving-section" id="inschrijving">
+  <div class="section-eyebrow">Meedoen</div>
+  <h2 class="section-title">Kaarten kopen</h2>
+  <p class="section-body">
+    Kaarten zijn verkrijgbaar in de voorverkoop vanaf <strong style="color:#fff">vrijdag 18 mei</strong> bij onderstaande verkooppunten in Boskoop, of aan de start op de eerste avond.
+  </p>
+  <div class="prijs-badge">
+    <span>🎟️</span>
+    <span>€ 6,- per persoon · alle routes</span>
+  </div>
+  <div class="verkoop-grid" style="margin-top:2.5rem;">
+    <div class="verkoop-card">
+      <div class="store-icon">📚</div>
+      <h4>Bruna Boskoop</h4>
+      <p>Voorverkoop</p>
+    </div>
+    <div class="verkoop-card">
+      <div class="store-icon">🗞️</div>
+      <h4>Primera Boskoop</h4>
+      <p>Voorverkoop</p>
+    </div>
+    <div class="verkoop-card">
+      <div class="store-icon">👟</div>
+      <h4>Koetsier Schoenmode</h4>
+      <p>Voorverkoop</p>
+    </div>
+    <div class="verkoop-card">
+      <div class="store-icon">📍</div>
+      <h4>Aan de start</h4>
+      <p>Maandag 1 juni · vanaf 18:15 uur</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow">Vragen?</div>
+  <h2 class="section-title">Contact</h2>
+  <p class="section-body">
+    Vragen over de wandeling, routes of organisatie? Stuur een mail naar <a href="mailto:webmaster@avdboskoop.nl" style="color:var(--groen-licht); font-weight:500;">webmaster@avdboskoop.nl</a>
+    of volg ons op Facebook voor de laatste nieuwtjes.
+  </p>
+  <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+    <a href="mailto:webmaster@avdboskoop.nl" class="btn-primary" style="text-decoration:none;">✉ Stuur een mail</a>
+    <a href="https://www.facebook.com/avondvierdaagseboskoop" target="_blank" class="btn-secondary" style="color: var(--donker); border-color: rgba(0,0,0,0.25);">f Facebook</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Avondvierdaagse Boskoop</div>
+    <div style="font-size:0.8rem; margin-top:0.4rem;">Stichting Avondvierdaagse Boskoop · Boskoop</div>
+  </div>
+  <div class="footer-links">
+    <a href="#">Home</a>
+    <a href="#programma">Programma</a>
+    <a href="#routes">Routes</a>
+    <a href="#inschrijving">Inschrijven</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div style="font-size:0.78rem;">© 2026 Stichting AVD Boskoop</div>
+</footer>
+
+<script>
+  // Countdown to June 1 2026 18:30
+  const target = new Date('2026-06-01T18:30:00');
+  function updateCountdown() {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('countdown-bar').innerHTML =
+        '<div style="color:#fff; font-size:1.1rem; font-weight:500; width:100%; text-align:center;">🎉 De Avondvierdaagse is begonnen! Tot vanavond op het Gouweplein!</div>';
+      return;
+    }
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
